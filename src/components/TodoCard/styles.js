@@ -1,13 +1,13 @@
 import styled from "styled-components/native"
 
-const Container = styled.View`
+const Container = styled.TouchableOpacity`
   margin: 15px;
   border-radius: 8px;
   border: 1px solid rgba(0, 0, 0, 0.7);
   align-items: center;
   padding: 10px;
-  max-width: 300px;
-  opacity: ${(props) => (props.completed ? 0.6 : 1)};
+  width: 300px;
+  opacity: ${(props) => (props.completed ? 0.5 : 1)};
   background-color: white;
 `
 

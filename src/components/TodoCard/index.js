@@ -11,7 +11,15 @@ import {
 
 const TodoCard = (props) => {
   return (
-    <Container completed={props.completed}>
+    <Container
+      completed={props.completed}
+      onPress={() => props.navigation.navigate("EditTodoPage", {
+        title: props.title,
+        text: props.text,
+        completed: props.completed,
+        index: props.index
+      })}
+    >
       <CardTitle>{props.title}</CardTitle>
 
       <CardText>{props.text}</CardText>

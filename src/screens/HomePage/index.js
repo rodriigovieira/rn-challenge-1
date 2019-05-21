@@ -10,6 +10,8 @@ import TodosContext from "../../context/TodosContext"
 const HomePage = (props) => {
   const { state } = React.useContext(TodosContext)
 
+  console.log(state)
+
   return (
     <Container contentContainerStyle={{ alignItems: "center" }}>
       <AddTodoButton onPress={() => props.navigation.navigate("AddTodoPage")}>
@@ -22,6 +24,8 @@ const HomePage = (props) => {
           text={todo.text}
           completed={todo.completed}
           key={index}
+          index={index}
+          navigation={props.navigation}
         />
       ))}
     </Container>

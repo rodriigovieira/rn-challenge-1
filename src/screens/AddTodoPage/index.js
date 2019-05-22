@@ -3,6 +3,8 @@ import React from "react"
 import {
   Container,
   PageTitle,
+  ErrorContainer,
+  ErrorEmptyText,
   FormContainer,
   TodoTitleInput,
   TodoTextInput,
@@ -18,7 +20,15 @@ const AddTodoPage = (props) => {
   const [todoTitle, setTodoTitle] = React.useState("")
   const [todoText, setTodoText] = React.useState("")
 
+  const [errorEmpty, setErrorEmtpy] = React.useState(false)
+
   const handleSubmit = () => {
+    if (!todoTitle || !todoText) {
+      setErrorEmtpy(true)
+
+      return
+    }
+
     dispatch({
       type: "ADD_TODO",
       todo: {
@@ -35,17 +45,19 @@ const AddTodoPage = (props) => {
     <Container>
       <PageTitle>Creating Todo</PageTitle>
 
+      {errorEmpty && (
+        <ErrorContainer>
+          <ErrorEmptyText>You need to fill all fields.</ErrorEmptyText>
+        </ErrorContainer>
+      )}
+
       <FormContainer>
-        <TodoTitleInput
-          value={todoTitle}
-          onChangeText={(todoTitle) => setTodoTitle(todoTitle)}
-          placeholder="Todo Title"
-        />
+        <TodoTitleInput value={todoTitle} onChangeText={setTodoTitle} placeholder="Todo Title" />
 
         <TodoTextInput
           value={todoText}
-          onChangeText={(todoText) => setTodoText(todoText)}
-          multiline={true}
+          onChangeText={setTodoText}
+          multiline
           placeholder="Add the todo text here"
         />
 

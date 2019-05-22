@@ -7,7 +7,7 @@ const Container = styled.TouchableOpacity`
   align-items: center;
   padding: 10px;
   width: 300px;
-  opacity: ${(props) => (props.completed ? 0.5 : 1)};
+  opacity: ${props => (props.completed ? 0.5 : 1)};
   background-color: white;
 `
 
@@ -28,10 +28,14 @@ const ActionsContainer = styled.View`
   margin: 8px;
 `
 
-const CardAction = styled.Text`
+const CardAction = styled.TouchableOpacity`
+  margin: 0 3px;
+  padding: 10px;
+`
+
+const CardActionText = styled.Text`
   font-size: 16px;
   font-weight: bold;
-  margin: 0 3px;
 `
 
 const Divider = styled.View`
@@ -41,4 +45,6 @@ const Divider = styled.View`
   background-color: lightgrey;
 `
 
-export { Container, CardTitle, CardText, ActionsContainer, CardAction, Divider }
+export {
+  Container, CardTitle, CardText, ActionsContainer, CardAction, Divider, CardActionText
+}

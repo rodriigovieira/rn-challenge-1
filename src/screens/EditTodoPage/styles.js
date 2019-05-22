@@ -13,6 +13,18 @@ const PageTitle = styled.Text`
   font-weight: bold;
 `
 
+const ErrorContainer = styled.View`
+  margin: 0 0 20px 0;
+  text-align: center;
+`
+
+const ErrorNoChangeText = styled.Text`
+  font-size: 14px;
+  color: red;
+`
+
+const ErrorEmptyText = styled(ErrorNoChangeText)``
+
 const FormContainer = styled.View`
   background-color: white;
   height: 260px;
@@ -46,7 +58,7 @@ const SubmitButton = styled.TouchableOpacity`
   width: 115px;
   border-radius: 8px;
   padding: 10px;
-  background-color: ${props => props.delete ? 'red' : 'darkorange'};
+  background-color: ${props => (props.delete ? "red" : "darkorange")};
 `
 
 const SubmitButtonText = styled.Text`
@@ -58,13 +70,16 @@ const SubmitButtonText = styled.Text`
 `
 
 const ButtonsContainer = styled.View`
- flex-direction: row;
- justify-content: space-around;
+  flex-direction: row;
+  justify-content: space-around;
 `
 
 export {
   Container,
   PageTitle,
+  ErrorContainer,
+  ErrorNoChangeText,
+  ErrorEmptyText,
   FormContainer,
   TodoTitleInput,
   TodoTextInput,

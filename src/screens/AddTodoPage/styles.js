@@ -13,6 +13,16 @@ const PageTitle = styled.Text`
   font-weight: bold;
 `
 
+const ErrorContainer = styled.View`
+  margin: 0 0 20px 0;
+  text-align: center;
+`
+
+const ErrorEmptyText = styled.Text`
+  font-size: 14px;
+  color: red;
+`
+
 const FormContainer = styled.View`
   background-color: white;
   height: 260px;
@@ -61,6 +71,8 @@ const SubmitButtonText = styled.Text`
 export {
   Container,
   PageTitle,
+  ErrorContainer,
+  ErrorEmptyText,
   FormContainer,
   TodoTitleInput,
   TodoTextInput,

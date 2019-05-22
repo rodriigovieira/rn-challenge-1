@@ -1,4 +1,5 @@
 import React from "react"
+import Reactotron from "reactotron-react-native"
 
 import {
   Container,
@@ -6,31 +7,62 @@ import {
   CardText,
   ActionsContainer,
   CardAction,
+  CardActionText,
   Divider
 } from "./styles"
 
-const TodoCard = (props) => {
+import TodosContext from "../../context/TodosContext"
+import ConfirmModal from "../ConfirmModal"
+
+const TodoCard = ({
+  title, text, completed, navigation, index
+}) => {
+  const { state, dispatch } = React.useContext(TodosContext)
+
+  const handleOpenModal = () => {
+    dispatch({ type: "TOGGLE_MODAL", index })
+  }
+
+  const handleComplete = () => {
+    dispatch({
+      type: "TOGGLE_TODO",
+      index
+    })
+
+    navigation.push("Home")
+  }
+
   return (
     <Container
-      completed={props.completed}
-      onPress={() => props.navigation.navigate("EditTodoPage", {
-        title: props.title,
-        text: props.text,
-        completed: props.completed,
-        index: props.index
-      })}
+      completed={completed}
+      onPress={() => navigation.navigate("EditTodoPage", {
+        title,
+        text,
+        completed,
+        index
+      })
+      }
     >
-      <CardTitle>{props.title}</CardTitle>
-
-      <CardText>{props.text}</CardText>
+      <CardTitle>{title}</CardTitle>
+      <CardText>{text}</CardText>
 
       <ActionsContainer>
-        <CardAction>Complete</CardAction>
+        <CardAction onPress={handleComplete}>
+          <CardActionText>Complete</CardActionText>
+        </CardAction>
 
         <Divider />
 
-        <CardAction>Delete</CardAction>
+        <CardAction onPress={handleOpenModal}>
+          <CardActionText>Delete</CardActionText>
+        </CardAction>
       </ActionsContainer>
+
+      {/* {Reactotron.log(index)} */}
+
+      {state.showModal && state.index === index && (
+        <ConfirmModal title={title} index={index} navigation={navigation} />
+      )}
     </Container>
   )
 }

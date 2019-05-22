@@ -1,5 +1,5 @@
 import React from "react"
-import { ScrollView } from "react-native"
+import Reactotron from "reactotron-react-native"
 
 import { Container, AddTodoButton, AddTodoButtonText } from "./styles"
 
@@ -10,7 +10,7 @@ import TodosContext from "../../context/TodosContext"
 const HomePage = (props) => {
   const { state } = React.useContext(TodosContext)
 
-  console.log(state)
+  // Reactotron.log(state)
 
   return (
     <Container contentContainerStyle={{ alignItems: "center" }}>
@@ -18,20 +18,23 @@ const HomePage = (props) => {
         <AddTodoButtonText>Add Todo</AddTodoButtonText>
       </AddTodoButton>
 
-      {state.map((todo, index) => (
-        <TodoCard
-          title={todo.title}
-          text={todo.text}
-          completed={todo.completed}
-          key={index}
-          index={index}
-          navigation={props.navigation}
-        />
+      {state.todos.map((todo, index) => (
+        <>
+          {/* {Reactotron.log(index)} */}
+          <TodoCard
+            title={todo.title}
+            text={todo.text}
+            completed={todo.completed}
+            key={index}
+            index={index}
+            navigation={props.navigation}
+          />
+        </>
       ))}
     </Container>
   )
 }
 
-HomePage.navigationOptions = { title: "HomePage" }
+HomePage.navigationOptions = { title: "HomePage", headerLeft: null }
 
 export default HomePage

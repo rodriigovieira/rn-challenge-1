@@ -12,6 +12,7 @@
     "react": "16.8.3",
     "react-native": "0.59.8",
     "react-native-gesture-handler": "^1.2.1",
+    "react-native-modal": "^11.0.1",
     "react-navigation": "^3.11.0",
     "styled-components": "^4.2.0"
   },
@@ -25,9 +26,11 @@
     "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.13.0",
+    "eslint-plugin-react-native": "^3.7.0",
     "jest": "^24.8.0",
     "metro-react-native-babel-preset": "^0.54.1",
-    "react-test-renderer": "16.8.3"
+    "react-test-renderer": "16.8.3",
+    "reactotron-react-native": "^3.5.2"
   },
   "jest": {
     "preset": "react-native"

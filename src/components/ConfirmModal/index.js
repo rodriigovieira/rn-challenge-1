@@ -1,5 +1,6 @@
 import React from "react"
 import Modal from "react-native-modal"
+import { connect } from "react-redux"
 
 import {
   Container,
@@ -10,28 +11,23 @@ import {
   CancelText,
   DeleteText
 } from "./styles"
-import TodosContext from "../../context/TodosContext"
+import { toggleModal as toggleModalAction } from "../../actions/modalActions"
+import { deleteTodo as deleteTodoAction } from "../../actions/todoActions"
 
-const ConfirmModal = ({ title, index, navigation }) => {
-  const { state, dispatch } = React.useContext(TodosContext)
-
+const ConfirmModal = ({
+  title, index, modal, toggleModal, deleteTodo
+}) => {
   const handleDelete = () => {
-    dispatch({
-      type: "DELETE_TODO",
-      index
-    })
-
-    dispatch({ type: "TOGGLE_MODAL" })
-
-    navigation.popToTop()
+    deleteTodo(index)
+    toggleModal()
   }
 
   const handleClose = () => {
-    dispatch({ type: "TOGGLE_MODAL" })
+    toggleModal()
   }
 
   return (
-    <Modal transparent isVisible={state.showModal}>
+    <Modal transparent isVisible={modal}>
       <Container>
         <ModalTitle>Confirm</ModalTitle>
 
@@ -51,4 +47,14 @@ const ConfirmModal = ({ title, index, navigation }) => {
   )
 }
 
-export default ConfirmModal
+const mapStateToProps = ({ modal }) => ({ modal })
+
+const mapDispatchToProps = dispatch => ({
+  toggleModal: () => dispatch(toggleModalAction()),
+  deleteTodo: index => dispatch(deleteTodoAction(index))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ConfirmModal)

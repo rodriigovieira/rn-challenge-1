@@ -16,6 +16,8 @@
     "react-native-gesture-handler": "^1.2.1",
     "react-native-modal": "^11.0.1",
     "react-navigation": "^3.11.0",
+    "react-redux": "^7.0.3",
+    "redux": "^4.0.1",
     "styled-components": "^4.2.0"
   },
   "devDependencies": {
@@ -23,6 +25,7 @@
     "@babel/runtime": "^7.4.4",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.8.0",
+    "babel-plugin-root-import": "^6.2.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.17.2",

@@ -1,4 +1,8 @@
 import React from "react"
+import { connect } from "react-redux"
+
+import { toggleTodo as toggleTodoAction } from "../../actions/todoActions"
+import { toggleModal as toggleModalAction } from "../../actions/modalActions"
 
 import {
   Container,
@@ -10,25 +14,26 @@ import {
   Divider
 } from "./styles"
 
-import TodosContext from "../../context/TodosContext"
 import ConfirmModal from "../ConfirmModal"
 
 const TodoCard = ({
-  title, text, completed, navigation, index
+  title,
+  text,
+  completed,
+  navigation,
+  index,
+  toggleTodo,
+  modal,
+  toggleModal
 }) => {
-  const { state, dispatch } = React.useContext(TodosContext)
-
   const handleOpenModal = () => {
-    dispatch({ type: "TOGGLE_MODAL", index })
+    toggleModal()
   }
 
   const handleComplete = () => {
-    dispatch({
-      type: "TOGGLE_TODO",
-      index
-    })
+    toggleTodo(index)
 
-    navigation.push("Home")
+    navigation.push("HomePage")
   }
 
   return (
@@ -57,11 +62,19 @@ const TodoCard = ({
         </CardAction>
       </ActionsContainer>
 
-      {state.showModal && state.index === index && (
-        <ConfirmModal title={title} index={index} navigation={navigation} />
-      )}
+      {modal && <ConfirmModal title={title} index={index} navigation={navigation} />}
     </Container>
   )
 }
 
-export default TodoCard
+const mapStateToProps = ({ modal }) => ({ modal })
+
+const mapDispatchToProps = dispatch => ({
+  toggleTodo: index => dispatch(toggleTodoAction(index)),
+  toggleModal: () => dispatch(toggleModalAction())
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TodoCard)

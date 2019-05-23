@@ -1,48 +1,62 @@
 import React from "react"
 import AsyncStorage from "@react-native-community/async-storage"
+import { connect } from "react-redux"
 
 import { Container, AddTodoButton, AddTodoButtonText } from "./styles"
 
+import { populateTodos as populateTodosAction } from "../../actions/todoActions"
+
 import TodoCard from "../../components/TodoCard"
 
-import TodosContext from "../../context/TodosContext"
-
-const HomePage = (props) => {
-  const { dispatch, state } = React.useContext(TodosContext)
-
+const HomePage = ({ populateTodos, navigation, todos }) => {
   React.useEffect(() => {
     AsyncStorage.getItem("@todos")
-      .then(localData => dispatch({
-        type: "POPULATE_TODOS",
-        todos: JSON.parse(localData)
-      }))
+      .then((localData) => {
+        if (localData) populateTodos([...JSON.parse(localData)])
+      })
       .catch(e => console.tron(e))
   }, [])
 
   React.useEffect(() => {
-    AsyncStorage.setItem("@todos", JSON.stringify(state.todos))
-  }, [state.todos])
+    console.trom(JSON.stringify(todos))
+    console.trom(todos)
+
+    AsyncStorage.setItem("@todos", JSON.stringify(todos))
+  }, [todos])
+
+  console.trom(todos)
 
   return (
     <Container contentContainerStyle={{ alignItems: "center" }}>
-      <AddTodoButton onPress={() => props.navigation.navigate("AddTodoPage")}>
+      <AddTodoButton onPress={() => navigation.navigate("AddTodoPage")}>
         <AddTodoButtonText>Add Todo</AddTodoButtonText>
       </AddTodoButton>
 
-      {state.todos.map((todo, index) => (
+      {todos.map((todo, index) => (
         <TodoCard
           title={todo.title}
           text={todo.text}
           completed={todo.completed}
           key={index}
           index={index}
-          navigation={props.navigation}
+          navigation={navigation}
         />
       ))}
     </Container>
   )
 }
 
+const mapDispatchToProps = dispatch => ({
+  populateTodos: todos => dispatch(populateTodosAction(todos))
+})
+
+const mapStateToProps = state => ({
+  todos: state.todos
+})
+
 HomePage.navigationOptions = { title: "HomePage", headerLeft: null, gesturesEnabled: false }
 
-export default HomePage
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HomePage)

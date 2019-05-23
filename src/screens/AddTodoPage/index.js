@@ -1,4 +1,7 @@
 import React from "react"
+import { connect } from "react-redux"
+
+import { addTodo as addTodoAction } from "../../actions/todoActions"
 
 import {
   Container,
@@ -12,10 +15,10 @@ import {
   SubmitButtonText
 } from "./styles"
 
-import TodosContext from "../../context/TodosContext"
+// import TodosContext from "../../context/TodosContext"
 
-const AddTodoPage = (props) => {
-  const { dispatch } = React.useContext(TodosContext)
+const AddTodoPage = ({ navigation, addTodo }) => {
+  // const { dispatch } = React.useContext(TodosContext)
 
   const [todoTitle, setTodoTitle] = React.useState("")
   const [todoText, setTodoText] = React.useState("")
@@ -29,16 +32,22 @@ const AddTodoPage = (props) => {
       return
     }
 
-    dispatch({
-      type: "ADD_TODO",
-      todo: {
-        title: todoTitle,
-        text: todoText,
-        completed: false
-      }
+    // dispatch({
+    //   type: "ADD_TODO",
+    //   todo: {
+    //     title: todoTitle,
+    //     text: todoText,
+    //     completed: false
+    //   }
+    // })
+
+    addTodo({
+      title: todoTitle,
+      text: todoText,
+      completed: false
     })
 
-    props.navigation.navigate("Home")
+    navigation.navigate("HomePage")
   }
 
   return (
@@ -69,4 +78,11 @@ const AddTodoPage = (props) => {
   )
 }
 
-export default AddTodoPage
+const mapDispatchToProps = dispatch => ({
+  addTodo: todo => dispatch(addTodoAction(todo))
+})
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(AddTodoPage)

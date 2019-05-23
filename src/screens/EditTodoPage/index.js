@@ -1,4 +1,5 @@
 import React from "react"
+import { connect } from "react-redux"
 
 import {
   Container,
@@ -15,11 +16,10 @@ import {
 } from "./styles"
 import ConfirmModal from "../../components/ConfirmModal"
 
-import TodosContext from "../../context/TodosContext"
+import { editTodo as editTodoAction } from "../../actions/todoActions"
+import { toggleModal as toggleModalAction } from "../../actions/modalActions"
 
-const EditTodoPage = ({ navigation }) => {
-  const { dispatch } = React.useContext(TodosContext)
-
+const EditTodoPage = ({ navigation, editTodo, toggleModal }) => {
   const defaultTodoTitle = navigation.getParam("title", "")
   const defaultTodoText = navigation.getParam("text", "")
   const index = navigation.getParam("index", -1)
@@ -52,23 +52,27 @@ const EditTodoPage = ({ navigation }) => {
       return
     }
 
-    dispatch({
-      type: "EDIT_TODO",
-      index,
-      todo: {
-        title: todoTitle,
-        text: todoText,
-        completed: false
-      }
+    // dispatch({
+    //   type: "EDIT_TODO",
+    //   index,
+    //   todo: {
+    //     title: todoTitle,
+    //     text: todoText,
+    //     completed: false
+    //   }
+    // })
+
+    editTodo(index, {
+      title: todoTitle,
+      text: todoText,
+      completed: false
     })
 
-    navigation.navigate("Home")
+    navigation.navigate("HomePage")
   }
 
   const handleDelete = () => {
-    dispatch({
-      type: "TOGGLE_MODAL"
-    })
+    toggleModal()
   }
 
   return (
@@ -104,4 +108,12 @@ const EditTodoPage = ({ navigation }) => {
   )
 }
 
-export default EditTodoPage
+const mapDispatchToProps = dispatch => ({
+  editTodo: (index, todo) => dispatch(editTodoAction(index, todo)),
+  toggleModal: () => dispatch(toggleModalAction())
+})
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(EditTodoPage)

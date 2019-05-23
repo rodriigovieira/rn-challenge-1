@@ -24,6 +24,12 @@ const EditTodoPage = ({ navigation }) => {
   const defaultTodoText = navigation.getParam("text", "")
   const index = navigation.getParam("index", -1)
 
+  console.trom({
+    title: defaultTodoTitle,
+    text: defaultTodoText,
+    index
+  })
+
   const [todoTitle, setTodoTitle] = React.useState(defaultTodoTitle)
   const [todoText, setTodoText] = React.useState(defaultTodoText)
 

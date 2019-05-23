@@ -1,6 +1,5 @@
 import React from "react"
 import Modal from "react-native-modal"
-import Reactotron from "reactotron-react-native"
 
 import {
   Container,
@@ -17,8 +16,6 @@ const ConfirmModal = ({ title, index, navigation }) => {
   const { state, dispatch } = React.useContext(TodosContext)
 
   const handleDelete = () => {
-    Reactotron.log(index)
-
     dispatch({
       type: "DELETE_TODO",
       index
@@ -26,14 +23,12 @@ const ConfirmModal = ({ title, index, navigation }) => {
 
     dispatch({ type: "TOGGLE_MODAL" })
 
-    navigation.push("Home")
+    navigation.popToTop()
   }
 
   const handleClose = () => {
     dispatch({ type: "TOGGLE_MODAL" })
   }
-
-  Reactotron.log(state.index)
 
   return (
     <Modal transparent isVisible={state.showModal}>

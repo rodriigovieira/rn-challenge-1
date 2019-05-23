@@ -1,5 +1,5 @@
 import React from "react"
-import Reactotron from "reactotron-react-native"
+import AsyncStorage from "@react-native-community/async-storage"
 
 import { Container, AddTodoButton, AddTodoButtonText } from "./styles"
 
@@ -8,9 +8,20 @@ import TodoCard from "../../components/TodoCard"
 import TodosContext from "../../context/TodosContext"
 
 const HomePage = (props) => {
-  const { state } = React.useContext(TodosContext)
+  const { dispatch, state } = React.useContext(TodosContext)
 
-  // Reactotron.log(state)
+  React.useEffect(() => {
+    AsyncStorage.getItem("@todos")
+      .then(localData => dispatch({
+        type: "POPULATE_TODOS",
+        todos: JSON.parse(localData)
+      }))
+      .catch(e => console.tron(e))
+  }, [])
+
+  React.useEffect(() => {
+    AsyncStorage.setItem("@todos", JSON.stringify(state.todos))
+  }, [state.todos])
 
   return (
     <Container contentContainerStyle={{ alignItems: "center" }}>
@@ -19,22 +30,19 @@ const HomePage = (props) => {
       </AddTodoButton>
 
       {state.todos.map((todo, index) => (
-        <>
-          {/* {Reactotron.log(index)} */}
-          <TodoCard
-            title={todo.title}
-            text={todo.text}
-            completed={todo.completed}
-            key={index}
-            index={index}
-            navigation={props.navigation}
-          />
-        </>
+        <TodoCard
+          title={todo.title}
+          text={todo.text}
+          completed={todo.completed}
+          key={index}
+          index={index}
+          navigation={props.navigation}
+        />
       ))}
     </Container>
   )
 }
 
-HomePage.navigationOptions = { title: "HomePage", headerLeft: null }
+HomePage.navigationOptions = { title: "HomePage", headerLeft: null, gesturesEnabled: false }
 
 export default HomePage

@@ -1,5 +1,4 @@
 import React from "react"
-import Reactotron from "reactotron-react-native"
 
 import {
   Container,
@@ -57,8 +56,6 @@ const TodoCard = ({
           <CardActionText>Delete</CardActionText>
         </CardAction>
       </ActionsContainer>
-
-      {/* {Reactotron.log(index)} */}
 
       {state.showModal && state.index === index && (
         <ConfirmModal title={title} index={index} navigation={navigation} />

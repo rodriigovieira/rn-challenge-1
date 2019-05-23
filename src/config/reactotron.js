@@ -1,9 +1,14 @@
 // eslint-disable-next-line
 import Reactotron, { trackGlobalErrors, openInEditor, asyncStorage } from "reactotron-react-native"
 
-Reactotron.configure()
+const tron = Reactotron.configure()
   .useReactNative()
   .use(trackGlobalErrors())
   .use(openInEditor())
   .use(asyncStorage())
   .connect()
+
+// eslint-disable-next-line
+console.tron = tron.log
+
+console.trom = tron.log

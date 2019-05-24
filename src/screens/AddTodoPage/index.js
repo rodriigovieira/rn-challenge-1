@@ -15,11 +15,7 @@ import {
   SubmitButtonText
 } from "./styles"
 
-// import TodosContext from "../../context/TodosContext"
-
 const AddTodoPage = ({ navigation, addTodo }) => {
-  // const { dispatch } = React.useContext(TodosContext)
-
   const [todoTitle, setTodoTitle] = React.useState("")
   const [todoText, setTodoText] = React.useState("")
 
@@ -32,22 +28,13 @@ const AddTodoPage = ({ navigation, addTodo }) => {
       return
     }
 
-    // dispatch({
-    //   type: "ADD_TODO",
-    //   todo: {
-    //     title: todoTitle,
-    //     text: todoText,
-    //     completed: false
-    //   }
-    // })
-
     addTodo({
       title: todoTitle,
       text: todoText,
       completed: false
     })
 
-    navigation.navigate("HomePage")
+    navigation.popToTop()
   }
 
   return (

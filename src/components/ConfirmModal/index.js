@@ -15,15 +15,16 @@ import { toggleModal as toggleModalAction } from "../../actions/modalActions"
 import { deleteTodo as deleteTodoAction } from "../../actions/todoActions"
 
 const ConfirmModal = ({
-  title, index, modal, toggleModal, deleteTodo
+  title, index, modal, toggleModal, deleteTodo, navigation
 }) => {
   const handleDelete = () => {
     deleteTodo(index)
-    toggleModal()
+    toggleModal(index)
+    navigation.popToTop()
   }
 
   const handleClose = () => {
-    toggleModal()
+    toggleModal(index)
   }
 
   return (
@@ -47,10 +48,10 @@ const ConfirmModal = ({
   )
 }
 
-const mapStateToProps = ({ modal }) => ({ modal })
+const mapStateToProps = state => ({ modal: state.modal.modal })
 
 const mapDispatchToProps = dispatch => ({
-  toggleModal: () => dispatch(toggleModalAction()),
+  toggleModal: index => dispatch(toggleModalAction(index)),
   deleteTodo: index => dispatch(deleteTodoAction(index))
 })
 

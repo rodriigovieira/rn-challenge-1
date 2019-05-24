@@ -1,3 +1,6 @@
-const toggleModal = () => ({ type: "TOGGLE_MODAL" })
+const toggleModal = index => ({
+  type: "TOGGLE_MODAL",
+  index
+})
 
 export { toggleModal }

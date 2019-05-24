@@ -23,11 +23,11 @@ const TodoCard = ({
   navigation,
   index,
   toggleTodo,
-  modal,
+  modalIndex,
   toggleModal
 }) => {
   const handleOpenModal = () => {
-    toggleModal()
+    toggleModal(index)
   }
 
   const handleComplete = () => {
@@ -43,7 +43,8 @@ const TodoCard = ({
         title,
         text,
         completed,
-        index
+        index,
+        modalIndex
       })
       }
     >
@@ -62,16 +63,16 @@ const TodoCard = ({
         </CardAction>
       </ActionsContainer>
 
-      {modal && <ConfirmModal title={title} index={index} navigation={navigation} />}
+      {index === modalIndex && <ConfirmModal title={title} index={index} navigation={navigation} />}
     </Container>
   )
 }
 
-const mapStateToProps = ({ modal }) => ({ modal })
+const mapStateToProps = state => ({ modal: state.modal.modal, modalIndex: state.modal.index })
 
 const mapDispatchToProps = dispatch => ({
   toggleTodo: index => dispatch(toggleTodoAction(index)),
-  toggleModal: () => dispatch(toggleModalAction())
+  toggleModal: index => dispatch(toggleModalAction(index))
 })
 
 export default connect(

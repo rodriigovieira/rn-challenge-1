@@ -24,6 +24,8 @@ const toggleTodo = index => ({
   index
 })
 
+const deleteAllTodos = () => ({ type: "DELETE_ALL_TODOS" })
+
 export {
-  populateTodos, addTodo, editTodo, deleteTodo, toggleTodo
+  populateTodos, addTodo, editTodo, deleteTodo, toggleTodo, deleteAllTodos
 }

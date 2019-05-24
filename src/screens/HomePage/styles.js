@@ -21,4 +21,13 @@ const AddTodoButtonText = styled.Text`
   font-weight: bold;
 `
 
-export { Container, AddTodoButton, AddTodoButtonText }
+const FilterTypeText = styled.Text`
+  font-size: 15px;
+  text-align: center;
+  color: blue;
+  margin: 10px;
+`
+
+export {
+  Container, AddTodoButton, AddTodoButtonText, FilterTypeText
+}

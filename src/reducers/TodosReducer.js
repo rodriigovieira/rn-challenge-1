@@ -2,6 +2,8 @@ const todosReducer = (state = [], action) => {
   switch (action.type) {
     case "POPULATE_TODOS":
       return [...action.todos]
+    case "DELETE_ALL_TODOS":
+      return []
     case "ADD_TODO":
       return [...state, action.todo]
     case "EDIT_TODO":

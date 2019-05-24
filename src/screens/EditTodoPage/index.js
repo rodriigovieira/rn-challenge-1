@@ -24,12 +24,6 @@ const EditTodoPage = ({ navigation, editTodo, toggleModal }) => {
   const defaultTodoText = navigation.getParam("text", "")
   const index = navigation.getParam("index", -1)
 
-  console.trom({
-    title: defaultTodoTitle,
-    text: defaultTodoText,
-    index
-  })
-
   const [todoTitle, setTodoTitle] = React.useState(defaultTodoTitle)
   const [todoText, setTodoText] = React.useState(defaultTodoText)
 
@@ -52,27 +46,17 @@ const EditTodoPage = ({ navigation, editTodo, toggleModal }) => {
       return
     }
 
-    // dispatch({
-    //   type: "EDIT_TODO",
-    //   index,
-    //   todo: {
-    //     title: todoTitle,
-    //     text: todoText,
-    //     completed: false
-    //   }
-    // })
-
     editTodo(index, {
       title: todoTitle,
       text: todoText,
       completed: false
     })
 
-    navigation.navigate("HomePage")
+    navigation.popToTop()
   }
 
   const handleDelete = () => {
-    toggleModal()
+    toggleModal(index)
   }
 
   return (
@@ -110,7 +94,7 @@ const EditTodoPage = ({ navigation, editTodo, toggleModal }) => {
 
 const mapDispatchToProps = dispatch => ({
   editTodo: (index, todo) => dispatch(editTodoAction(index, todo)),
-  toggleModal: () => dispatch(toggleModalAction())
+  toggleModal: index => dispatch(toggleModalAction(index))
 })
 
 export default connect(

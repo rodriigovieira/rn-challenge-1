@@ -1,7 +1,7 @@
-const modalReducer = (state = false, action) => {
+const modalReducer = (state = { modal: false, index: -1 }, action) => {
   switch (action.type) {
     case "TOGGLE_MODAL":
-      return !state
+      return { modal: !state.modal, index: action.index }
     default:
       return state
   }

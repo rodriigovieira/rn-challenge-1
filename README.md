@@ -8,10 +8,21 @@ This application is a simple todo app that features the following:
 1. CRUD operations (you can create, edit and delete all todos)
 2. Color separation (completed todos have reduced opacity)
 3. Data persistance (even if you close the app, the data will remain in there)
-4. WIP - Filter all todos by completed, active and all
-5. WIP - Redux integration
+4. Filter all todos by completed, active and all
+5. Redux integration
+
+It uses styled-components for styling and Reactotron for debugging.
 
 It aims to show how to build a simple React Native application from scratch that has basic CRUD features.
+
+## Screenshots
+
+<img src="/assets_github/HomePage.jpeg" height="570">
+<img src="/assets_github/AddTodoPage.jpeg" height="570">
+<img src="/assets_github/EditTodoPage.jpeg" height="570">
+<img src="/assets_github/FilterActionSheet.jpeg" height="570">
+<img src="/assets_github/FilteredHomePage.jpeg" height="570">
+<img src="/assets_github/DeleteModal.jpeg" height="570">
 
 # Installation
 

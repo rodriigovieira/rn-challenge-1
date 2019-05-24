@@ -17,12 +17,9 @@ It aims to show how to build a simple React Native application from scratch that
 
 ## Screenshots
 
-<img src="/assets_github/HomePage.jpeg" height="570">
-<img src="/assets_github/AddTodoPage.jpeg" height="570">
-<img src="/assets_github/EditTodoPage.jpeg" height="570">
-<img src="/assets_github/FilterActionSheet.jpeg" height="570">
-<img src="/assets_github/FilteredHomePage.jpeg" height="570">
-<img src="/assets_github/DeleteModal.jpeg" height="570">
+<img src="/assets_github/HomePage.jpeg" height="570"> <img src="/assets_github/AddTodoPage.jpeg" height="570"> <img src="/assets_github/EditTodoPage.jpeg" height="570">
+
+<img src="/assets_github/FilterActionSheet.jpeg" height="570"> <img src="/assets_github/FilteredHomePage.jpeg" height="570"> <img src="/assets_github/DeleteModal.jpeg" height="570">
 
 # Installation
 
